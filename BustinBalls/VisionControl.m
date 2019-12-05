@@ -13,20 +13,21 @@ ballRad.mm=ballDiam.mm/2;
 color = {[0 0 0];[1 0 0];[0.4660 0.6740 0.1880];[0 0 1];[0.8500 0.3250 0.0980];[1 0 1]};
 %%
 %Get IMG and undistort
+%Get IMG and undistort
 load imgLeft leftImgArry
 load imgRight rightImgArry
 load ZedCallibrated stereoParams
-leftEye = undistortImage(leftImgArry,stereoParams.CameraParameters1);
-rightEye = undistortImage(rightImgArry,stereoParams.CameraParameters2);
-rightEye=BGR2RGB(rightEye);
-leftEye=BGR2RGB(leftEye);
-imshow(leftEye)
-axis on;
-%figure
-%imshow(rightEye)
-%axis on;
-%imwrite(rightEye,'S:\BustinBalls\Photos\img1_1.tiff')
-%imwrite(leftEye,'S:\BustinBalls\Photos\img1_2.tiff')
+
+
+zed.left.OG=leftImgArry;
+zed.left.undistorted.BGR = undistortImage(zed.left.OG,stereoParams.CameraParameters1);
+zed.left.undistorted.RGB=BGR2RGB(zed.left.undistorted.BGR);
+
+
+zed.right.OG=rightImgArry;
+zed.right.undistorted.BGR = undistortImage(rightImgArry,stereoParams.CameraParameters2);
+zed.right.undistorted.RGB=BGR2RGB(zed.right.undistorted.BGR);
+
 
 
 %%
